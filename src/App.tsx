@@ -5,7 +5,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage'
 import RootLayout from './layouts/RootLayout'
 import Wishlist from './components/WishList'
-import CartPage from './components/CartPage'
+// import CartPage from './components/CartPage'
+import CategoryPage from './pages/CategoryPage'
 import Omo from './components/Omo'
 
 
@@ -16,6 +17,7 @@ const App = () => {
       <Route path='/' element={<HomePage/>}/>
       <Route path='wishlist' element={<Wishlist/>}/>
       <Route path ='/contact' element={<Omo/>}/>
+      <Route path='/category/:categoryName' element ={<CategoryPage/>}/>
     </Route>
      
   ))

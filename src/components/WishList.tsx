@@ -1,9 +1,7 @@
 import { useQueries } from "@tanstack/react-query"
 import { useFavoritesStore } from "../store/favourite.store"
-import ProductCard from "./ProuctCard"
 import type { Product } from "../services/products/product.type"
 import { eachProduct } from "../services/products/product.service"
-import Spinner from "./Spinner"
 import ProductGrid from "./ProductGrid"
 
 const Wishlist = () => {

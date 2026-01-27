@@ -16,14 +16,12 @@ export const fetchSearch = async (search:string):Promise<Product | Product[]> =>
    const res =await axios.get<{products:Product| Product[]}>(`https://dummyjson.com/products/search?q=${search}`)
    return res.data.products
 }
-export const categorySearch = async (category:string):Promise<Product | Product[]> => {
-   const res =await axios.get<{products:Product| Product[]}>(`https://dummyjson.com/products/category/${category}`)
+export const categorySearch = async (category:string):Promise<Product[]> => {
+   const res =await axios.get<{products:Product[]}>(`https://dummyjson.com/products/category/${category}`)
    return res.data.products
 }
 
-export const fetchCategories = async (): Promise<string[]> => {
-  const res = await axios.get<string[]>(
-    "https://dummyjson.com/products/category-list"
-  );
+export const fetchCategoriesList = async (): Promise<string[]> => {
+  const res = await axios.get<string[]>("https://dummyjson.com/products/category-list");
   return res.data; // directly the array of strings
 };

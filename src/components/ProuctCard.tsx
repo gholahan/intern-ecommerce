@@ -15,7 +15,7 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
 
   const discountPrice = Math.round(product.price  - (product.price * (product.discountPercentage/100)));
 
-  const {addFavorite,removeFavorite,isFavorite} = useFavoritesStore();
+  const {addFavorite, removeFavorite, isFavorite} = useFavoritesStore();
   const liked = isFavorite(product.id);
 
   const renderStars = (rating: number) => {
@@ -30,9 +30,6 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
       </span>
     ));
   };
-
-  const favourite = useFavoritesStore(s=>s.favorites)
-  console.log(favourite)
 
   return (
     

@@ -1,11 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllProduct } from "../services/products/product.service";
 import type { Product } from "../services/products/product.type";
 import ProductCard from "./ProuctCard";
-import Spinner from "./Spinner";
 
 interface ProductGridProp{
-    product: Product[] | undefined,
+    product: Product[],
     explore:boolean
 }
 

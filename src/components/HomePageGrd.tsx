@@ -29,7 +29,7 @@ const HomePageGrd = () => {
           />
         </div>
 
-        <ProductGrid product={data} explore={false}/>
+        <ProductGrid product={data as Product[]} explore={false}/>
 
         {data && data.length > 0 && (
           <div className="flex justify-center mt-6 space-x-4">
