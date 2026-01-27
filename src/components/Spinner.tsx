@@ -8,14 +8,12 @@ const override = {
 
 const Spinner = ({loading}:any) => {
   return (
-    <div className='h-screen bg-white'>
-        <ClipLoader
-   color='#4338ca'
-   loading = {loading}
-   cssOverride = {override}
-   size = {150}
-   />
-    </div>
+    <ClipLoader
+      color='#4338ca'
+      loading = {loading}
+      cssOverride = {override}
+      size = {150}
+    />
   )
 }
 

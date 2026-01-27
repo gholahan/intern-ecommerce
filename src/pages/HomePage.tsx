@@ -1,20 +1,14 @@
-import ProductGrid from "../components/ProductGrid"
-import { fetchAllProduct } from "../services/products/product.service";
-import { useQuery} from "@tanstack/react-query";
-import type { Product } from "../services/products/product.type";
-import Spinner from "../components/Spinner";
+import HomePageGrd from "../components/HomePageGrd";
+import TopDiv from "../components/TopDiv";
+
 
 const HomePage = () => {
-  const {data,isLoading, error} = useQuery<Product[]>({
-    queryKey:['products'],
-    queryFn: fetchAllProduct
-    });
-    if(isLoading) return <Spinner/>
-    if(error) return <p>..ahahah</p>
+
   return (
-    <>
-     <ProductGrid product={data} />
-    </>
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[2vw]">
+     <TopDiv/>
+     <HomePageGrd/>
+    </div>
   )
 }
 

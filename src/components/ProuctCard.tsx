@@ -1,8 +1,8 @@
 import type { Product } from "../services/products/product.type";
-import {CiHeart} from 'react-icons/ci'
 import {Eye, ShoppingCart} from 'lucide-react'
 import { useFavoritesStore } from "../store/favourite.store";
-import { Apple } from 'lucide-react';
+import { CiHeart } from "react-icons/ci";      
+import { AiFillHeart } from "react-icons/ai";
 import { Star } from 'lucide-react';
 
 
@@ -36,14 +36,15 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
 
   return (
     
-    <div className="rounded-lg p-4 group mt-7">
+    <div className="rounded-lg  group mt-6 hover:-translate-y-2 transition-transform duration-300 ease-out">
      <div className="relative bg-gray-100 mb-5 rounded-sm group">
       {/* Action Icons */}
        <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
         <button
-         onClick={()=>liked ? removeFavorite(product.id) :addFavorite(product.id) }
-         className="bg-white rounded-full p-2 hover:bg-gray-100 transition ">
-          {liked ? <Apple/> : <CiHeart size={25}/> }
+          onClick={() => (liked ? removeFavorite(product.id) : addFavorite(product.id))}
+          className="bg-white rounded-full p-2 hover:bg-gray-100 transition"
+        >
+          {liked ? <AiFillHeart size={28} className="text-red-500" /> : <CiHeart size={28} />}
         </button>
         <button  className="bg-white rounded-full p-2 hover:bg-gray-100 transition ">
             <Eye size={25}/>
@@ -62,7 +63,7 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
       {/* add to cart button */}
       <button
           //  onClick={()=>}
-            className="bg-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0: w-full text-center hover:bg- text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
+            className="bg-black opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0: w-full text-center hover:bg- text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
           >
             <ShoppingCart size={18} />
             <span className="text-sm font-medium">Add To Cart</span>

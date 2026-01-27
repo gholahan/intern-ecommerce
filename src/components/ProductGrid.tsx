@@ -5,7 +5,7 @@ import ProductCard from "./ProuctCard";
 import Spinner from "./Spinner";
 
 interface ProductGridProp{
-    product: Product[],
+    product: Product[] | undefined,
     explore:boolean
 }
 
@@ -35,7 +35,7 @@ const ProductGrid = ({product,explore}:ProductGridProp) => {
       </div> */}
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
         {product?.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

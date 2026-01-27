@@ -8,7 +8,6 @@ import ProductGrid from "./ProductGrid"
 
 const Wishlist = () => {
       const favorites: number[] = useFavoritesStore(s=>s.favorites);
-      console.log(favorites.length)
 
     const likedProducts = useQueries({
         queries: favorites.map((id:number)=>({
@@ -22,8 +21,9 @@ const Wishlist = () => {
     .filter(Boolean) as Product[];
 
   return (
-    <div className="sm:px-[5vw] md:px-[7vw] lg:px-[9vw] mt-16">
-        <div className="relative flex justify-between">
+    <div className="mt-6">
+        <div>
+          <div className="relative flex justify-between">
            <p className="">Wishlist ({favorites.length})</p>
            <button className="absolute top-0 right-0 inline-flex items-center justify-center shadow-md px-12 py-4">
                Add all to bag
@@ -31,6 +31,7 @@ const Wishlist = () => {
         </div>
         <div>
           <ProductGrid product={products} explore={false}/>
+        </div>
         </div>
     </div>
   )
