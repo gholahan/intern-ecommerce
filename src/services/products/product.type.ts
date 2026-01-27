@@ -40,3 +40,9 @@ export interface Product {
   
 }
 
+export interface fetchAllProductRes{
+  products : Product[];
+  total: number;
+  skip:number;
+  limit :number
+} 
