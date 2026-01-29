@@ -4,10 +4,10 @@ import {ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage'
 import RootLayout from './layouts/RootLayout'
-import Wishlist from './components/WishList'
+import Wishlist from './pages/WishListPage'
 // import CartPage from './components/CartPage'
 import CategoryPage from './pages/CategoryPage'
-import Omo from './components/Omo'
+import SearchPage from './pages/SearchPage'
 
 
 const App = () => {
@@ -16,7 +16,8 @@ const App = () => {
     <Route element={<RootLayout/>}>
       <Route path='/' element={<HomePage/>}/>
       <Route path='wishlist' element={<Wishlist/>}/>
-      <Route path ='/contact' element={<Omo/>}/>
+      <Route path='' element={<SearchPage/>}/>
+      <Route path='/search' element={<SearchPage/>}/>
       <Route path='/category/:categoryName' element ={<CategoryPage/>}/>
     </Route>
      

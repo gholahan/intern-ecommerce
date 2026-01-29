@@ -2,13 +2,12 @@ import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { UserPen } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
 import { useFavoritesStore } from "../store/favourite.store";
-import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 
 const Navbar = () => {
-  const [search,setSearch] = useState('')
+
   const favorites = useFavoritesStore(s=>s.favorites)
 
   const navClass = ({ isActive}:any) =>
@@ -38,23 +37,8 @@ const Navbar = () => {
         {/* Actions */}
         <div className="flex items-center gap-4">
 
-          <div className="relative w-full max-w-md bg-neutral-100 ">
-            <input
-              id="search"
-              name="search"
-              type="text"
-              value={search}
-              onChange={e=>setSearch(e.target.value)}
-              placeholder="What are you looking for?"
-              className="w-full  py-3 pl-5 pr-12 text-sm text-gray-700 placeholder-gray-400 outline-none"
-            />
-      
-            {/* Search icon */}
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500">
-              <FaSearch/>
-            </div>
-          </div>
-
+          {/* <SearchBar/> */}
+          <SearchBar/>
           {/* Wishlist */}
           <Link to="/wishlist" className="relative">
             <CiHeart size={30} />

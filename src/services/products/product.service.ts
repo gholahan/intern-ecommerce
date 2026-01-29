@@ -13,9 +13,9 @@ export const eachProduct = async (id:number):Promise<Product> => {
   const res = await axios.get<Product>(`${API_URL}/${id}`);
   return res.data
 }
-export const fetchSearch = async (search:string):Promise<Product | Product[]> => {
-   const res =await axios.get<{products:Product| Product[]}>(`https://dummyjson.com/products/search?q=${search}`)
-   return res.data.products
+export const fetchSearch = async (search:string,skip:number, limit:number):Promise<fetchAllProductRes> => {
+   const res =await axios.get<fetchAllProductRes>(`https://dummyjson.com/products/search?q=${search}&skip=${skip}&limit=${limit}`)
+   return res.data
 }
 export const categorySearch = async (category:string,skip:number, limit:number):Promise<fetchAllProductRes> => {
    const res =await axios.get<fetchAllProductRes>(`https://dummyjson.com/products/category/${category}?skip=${skip}&limit=${limit}`)

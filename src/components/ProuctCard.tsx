@@ -8,7 +8,6 @@ import { Star } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
-
 }
 
 const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
@@ -54,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
       {/* Product Image Area */}
       <div className="w-full h-auto rounded-lg mb-4 flex items-center justify-center">
         <div className="text-gray-400 text-sm">
-          <img src={product.thumbnail} alt="" />
+          <img src={product.images[0]} alt="" />
         </div>
       </div>
       {/* add to cart button */}

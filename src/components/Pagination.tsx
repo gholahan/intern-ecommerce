@@ -15,13 +15,6 @@ const Pagination = ({
   return (
     <div className="flex justify-center mt-6 space-x-4">
       <button
-        onClick={() => setPage(1)}
-        className="px-4 py-2 bg-gray-100 border rounded"
-      >
-        Reset
-      </button>
-
-      <button
         onClick={() => setPage(page - 1)}
         disabled={page === 1}
         className="px-4 py-2 bg-gray-100 border rounded disabled:opacity-50"
@@ -29,7 +22,7 @@ const Pagination = ({
         Previous
       </button>
 
-      {Array.from({ length: totalPages || 0 }, (_, i) => i + 1).map((pageNum) => (
+      {Array.from({ length: totalPages || 1 }, (_, i) => i + 1).map((pageNum) => (
         <button
           key={pageNum}
           onClick={() => setPage(pageNum)}

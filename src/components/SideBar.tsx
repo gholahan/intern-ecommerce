@@ -1,21 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import {fetchCategoriesList} from '../services/products/product.service'
 import { Link } from 'react-router-dom';
-import Spinner from './Spinner';
 
 const SideBar = () => {
-
 
     const { data: categories = [], isLoading: catLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategoriesList,
   });
-   if (catLoading) return <Spinner/>
 
-  return (
-   
+  return (  
       <div className="min-w-60 items-start gap-6">
-
         {/* Categories List */}
         <nav className="border-r border-gray-200">
           <ul className="flex flex-col gap-3 mt-4 font-medium">
@@ -33,9 +28,6 @@ const SideBar = () => {
             ))}
           </ul>
         </nav>
-
-        {/* Top Image */}
-
       </div>
    
   );

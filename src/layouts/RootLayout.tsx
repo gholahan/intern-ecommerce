@@ -4,9 +4,10 @@ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 const RootLayout = () => {
   return (
-    <div className="flex flex-col">
+    <>
      <AnnouncementBar/>
      <Navbar/>
+    <div className="flex flex-col">
      <main className='min-h-screen px-4 sm:px-[4vw] md:px-[7vw] lg:px-[9vw] '>
       
       <Outlet/>
@@ -14,6 +15,7 @@ const RootLayout = () => {
 
      <Footer/>
      </div>
+    </>
   )
 }
 

@@ -16,7 +16,7 @@ const HomePageGrd = () => {
     queryFn: () => fetchAllProduct((page - 1) * limit, limit),
   });
 
-  const totalPages = data ? Math.ceil(data.total / data.limit) : 0;
+  const totalPages = data?.products ? Math.ceil(data.total / limit) : 1;
 
   if (isLoading) return <Spinner />;
   if (error) return <p>Something went wrong</p>;

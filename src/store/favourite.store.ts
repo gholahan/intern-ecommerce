@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -13,7 +14,7 @@ export const useFavoritesStore = create<FavoritesStore>()(
     (set, get) => ({
       favorites: [],
 
-     addFavorite:(id) =>set((state)=>( state.favorites.includes(id) ? state : {favorites:[...state.favorites,id]})),
+     addFavorite:(id) => (set((state)=>( state.favorites.includes(id) ? state : {favorites:[...state.favorites,id]}))),
 
      removeFavorite: (id) => set((state)=>({favorites:state.favorites.filter(ids => ids !== id)})),
 
