@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchSearch } from '../services/products/product.service';
-import type { fetchAllProductRes } from '../services/products/product.type';
+import type { fetchAllProductRes } from '../types/product.type';
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import ProductGrid from './ProductGrid';
@@ -16,8 +16,8 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebounced(search), 1000);
-    return () => clearTimeout(timer);
+   const timer = setTimeout(()=> setDebounced(search), 1000);
+   return () => clearTimeout(timer)
   }, [search]);
 
   const { data, isLoading } = useQuery<fetchAllProductRes>({
@@ -27,8 +27,10 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
   });
 
   const handleViewAll = () => {
+    
     navigate(`/search?q=${encodeURIComponent(search)}`);
     onClose();
+    
   };
 
   if (isLoading) return null;
@@ -39,7 +41,7 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
     onClick={onClose}
     >
       <div
-        className="relative w-[90vw] max-w-8xl max-h-[65vh] overflow-y-auto bg-white rounded-lg shadow-2xl p-6 border border-gray-200 mt"
+        className="relative w-[90vw] max-w-8xl max-h-[55vh] overflow-y-auto bg-white rounded-lg shadow-2xl p-6 border border-gray-200 "
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -67,14 +69,16 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
         )}
 
         {data?.products && data.products.length > 0 && (
-          <div className="flex justify-center">
-            <button
-              onClick={handleViewAll}
-              className="text-blue-600 hover:text-blue-800 font-semibold"
-            >
-              See All ...
-            </button>
-          </div>
+          <div className="sticky bottom-0 flex justify-center ">
+          <button
+            type="button"
+            onClick={handleViewAll}
+            className="text-blue-600 hover:text-white px-4 py-5 font-semibold bg-gray-800"
+          >
+            See All →
+          </button>
+        </div>
+
         )}
       </div>
     </div>

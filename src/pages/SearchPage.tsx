@@ -1,24 +1,25 @@
-import topImage from '../assets/images/top-image.jpg';
 import ProductGrid from "../components/ProductGrid";
 import Pagination from '../components/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchSearch } from '../services/products/product.service';
-import type { fetchAllProductRes } from '../services/products/product.type';
+import type { fetchAllProductRes } from '../types/product.type';
 import { useState } from 'react';
+import Spinner from "../components/Spinner";
 
 const SearchPage = () => {
+  const limit = 24;
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
-  const query = searchParams.get('q') || '';
+  const query = searchParams.get('q') ?? '';
 
   const { data, isLoading, isError } = useQuery<fetchAllProductRes>({
     queryKey: ['search', query, page],
-    queryFn: () => fetchSearch(query, page - 1, 0),
+    queryFn: () => fetchSearch(query, (page - 1) * limit, limit),
     enabled: query.length > 0,
   });
 
-  const totalPages = data?.products ? Math.ceil(data.products.length / 10) : 1;
+  const totalPages = data?.products ? Math.ceil(data.products.length / limit) : 1;
 
   if (!query) {
     return (
@@ -31,7 +32,7 @@ const SearchPage = () => {
   if (isLoading) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">Loading results...</p>
+        <Spinner loading={isLoading}/>
       </div>
     );
   }
@@ -58,7 +59,7 @@ const SearchPage = () => {
         ) : (
           <>
             <ProductGrid product={data.products} explore={false} />
-
+            
             {data.products.length > 0 && (
               <Pagination
                 page={page}

@@ -1,4 +1,4 @@
-import type { Product } from "../services/products/product.type";
+import type { Product } from "../types/product.type";
 import ProductCard from "./ProuctCard";
 
 interface ProductGridProp{
@@ -16,7 +16,7 @@ const ProductGrid = ({product,explore}:ProductGridProp) => {
       </div>
 
       {/* View All Button */}
-      {explore ?<div className="flex justify-center">
+      {explore ? <div className="flex justify-center">
         <button className="bg-red-500 text-white px-12 py-4 rounded hover:bg-red-600 transition font-medium">
           View All Products
         </button>

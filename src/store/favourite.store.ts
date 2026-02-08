@@ -14,9 +14,15 @@ export const useFavoritesStore = create<FavoritesStore>()(
     (set, get) => ({
       favorites: [],
 
-     addFavorite:(id) => (set((state)=>( state.favorites.includes(id) ? state : {favorites:[...state.favorites,id]}))),
+     addFavorite:(id) => (set((state)=>{
+      toast.info('Added product to favorite')
+      return {favorites: [...state.favorites, id ]}
+    })),
 
-     removeFavorite: (id) => set((state)=>({favorites:state.favorites.filter(ids => ids !== id)})),
+     removeFavorite: (id) => set((state)=>{
+      toast.info('Product removed from favourites')
+       return {favorites: state.favorites.filter(ids => ids !== id)}
+      }),
 
       isFavorite: (id) =>
         get().favorites.includes(id),

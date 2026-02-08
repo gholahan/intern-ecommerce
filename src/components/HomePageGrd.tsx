@@ -2,7 +2,7 @@ import topImage from '../assets/images/top-image.jpg';
 import ProductGrid from "../components/ProductGrid";
 import { fetchAllProduct } from "../services/products/product.service";
 import { useQuery} from "@tanstack/react-query";
-import type { fetchAllProductRes } from '../services/products/product.type';
+import type { fetchAllProductRes } from '../types/product.type';
 import Spinner from "../components/Spinner";
 import { useState } from 'react';
 import Pagination from './Pagination';
@@ -18,7 +18,7 @@ const HomePageGrd = () => {
 
   const totalPages = data?.products ? Math.ceil(data.total / limit) : 1;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner loading={isLoading} />;
   if (error) return <p>Something went wrong</p>;
 
   return (

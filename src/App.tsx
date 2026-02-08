@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer  position="top-center"/>
       <RouterProvider router={routes}/>
     </>
   )

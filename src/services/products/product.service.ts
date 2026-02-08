@@ -1,6 +1,6 @@
 import axios from "axios";
-import type { Product } from "./product.type"
-import type {fetchAllProductRes} from './product.type'
+import type { Product } from "../../types/product.type"
+import type {fetchAllProductRes} from '../../types/product.type'
 
 const API_URL:string = 'https://dummyjson.com/products'
 
