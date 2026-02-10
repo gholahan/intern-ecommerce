@@ -4,11 +4,13 @@ import { UserPen } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { useFavoritesStore } from "../store/favourite.store";
 import SearchBar from "./SearchBar";
+import { useCartStore } from "../store/cart.store";
 
 
 const Navbar = () => {
 
-  const favorites = useFavoritesStore(s=>s.favorites)
+  const {favorites} = useFavoritesStore() //
+  const {cart} = useCartStore();
 
   const navClass = ({ isActive}:any) =>
     `text-base transition ${
@@ -37,8 +39,8 @@ const Navbar = () => {
         {/* Actions */}
         <div className="flex items-center gap-4">
 
-          {/* <SearchBar/> */}
-          <SearchBar/>
+          <SearchBar/> {/*searchBar*/}
+
           {/* Wishlist */}
           <Link to="/wishlist" className="relative">
             <CiHeart size={30} />
@@ -48,8 +50,11 @@ const Navbar = () => {
           </Link>
 
           {/* Cart */}
-          <Link to="/cart">
+          <Link to="/cart" className="relative">
             <BsCart3 size={26} />
+             <span className="absolute -right-1 -top-1 bg-red-700 text-white text-[10px] w-4 aspect-square rounded-full flex items-center justify-center">
+              {cart.length}
+            </span>
           </Link>
 
           {/* Profile dropdown */}

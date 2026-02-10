@@ -1,9 +1,10 @@
-import type { Product } from "../services/products/product.type";
+import type { Product } from "../types/product.type";
 import {Eye, ShoppingCart} from 'lucide-react'
 import { useFavoritesStore } from "../store/favourite.store";
 import { CiHeart } from "react-icons/ci";      
 import { AiFillHeart } from "react-icons/ai";
 import { Star } from 'lucide-react';
+import { useCartStore } from "../store/cart.store";
 
 
 interface ProductCardProps {
@@ -13,6 +14,9 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
 
   const discountPrice = Math.round(product.price  - (product.price * (product.discountPercentage/100)));
+
+  const {addToCart, removeFromCart, added} = useCartStore();
+  const addedToCart = added(product.id);
 
   const {addFavorite, removeFavorite, isFavorite} = useFavoritesStore();
   const liked = isFavorite(product.id);
@@ -51,18 +55,18 @@ const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
       </div>
 
       {/* Product Image Area */}
-      <div className="w-full h-auto rounded-lg mb-4 flex items-center justify-center">
-        <div className="text-gray-400 text-sm">
-          <img src={product.images[0]} alt="" />
+      <div className="w-full h-full rounded-lg mb-4 flex items-center justify-center aspect-square overflow-hidden relative">
+        <div className="absolute inset-0  bg-gray-300">
+          <img src={product.thumbnail}/> 
         </div>
       </div>
       {/* add to cart button */}
       <button
-          //  onClick={()=>}
-            className="bg-black opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0: w-full text-center hover:bg- text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
+           onClick={()=> (addedToCart ? removeFromCart(product.id) : addToCart(product.id))}
+            className="cursor-pointer bg-black opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0: w-full text-center hover:bg- text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
           >
             <ShoppingCart size={18} />
-            <span className="text-sm font-medium">Add To Cart</span>
+            <span className="text-sm font-medium"> {addedToCart ? 'Added' : 'Add To Cart'}</span>
         </button>
       {/* Product Name */}
      </div>
