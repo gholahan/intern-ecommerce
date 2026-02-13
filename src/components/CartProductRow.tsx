@@ -98,14 +98,14 @@ function CartProductRowItem({ item }: { item: Product }) {
         <div className="flex flex-col">
           <button
             onClick={() => increaseCount(item.id)}
-            className="px-2 py-0.5 text-xs hover:bg-gray-100 transition"
+            className="px-2 py-0.5 text-xs hover:bg-gray-100 cursor-pointer transition"
           >
             ▲
           </button>
           <button
             onClick={() => decreaseCount(item.id)}
             disabled={quantity <= 1}
-            className="px-2 py-0.5 text-xs hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-2 py-0.5 text-xs hover:bg-gray-100 transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             ▼
           </button>
