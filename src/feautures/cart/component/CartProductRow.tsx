@@ -1,5 +1,5 @@
-import type { Product } from "../types/product.type"
-import { useCartStore } from "../store/cart.store"
+import type { Product } from "../../products/types/product"
+import { useCartStore } from "../cart.store"
 import { Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
 

@@ -1,10 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchSearch } from '../services/products/product.service';
-import type { fetchAllProductRes } from '../types/product.type';
 import { X } from "lucide-react";
-import { useEffect, useState } from "react";
-import ProductGrid from './ProductGrid';
-import { useNavigate } from 'react-router-dom';
+import ProductGrid from '../../feautures/products/components/ProductGrid';
+import Spinner from './Spinner';
+import { useSearchPreview } from "../../feautures/products/hooks/useSearchPreview";
 
 interface SearchModalProps {
   search: string;
@@ -12,28 +9,9 @@ interface SearchModalProps {
 }
 
 const SearchModal = ({ search, onClose }: SearchModalProps) => {
-  const [debounced, setDebounced] = useState(search);
-  const navigate = useNavigate();
+  const {isLoading, data, handleViewAll} = useSearchPreview(search, onClose)
 
-  useEffect(() => {
-   const timer = setTimeout(()=> setDebounced(search), 1000);
-   return () => clearTimeout(timer)
-  }, [search]);
-
-  const { data, isLoading } = useQuery<fetchAllProductRes>({
-    queryKey: ['search', debounced],
-    queryFn: () => fetchSearch(debounced, 0, 0),
-    enabled: debounced.length > 2,
-  });
-
-  const handleViewAll = () => {
-    
-    navigate(`/search?q=${encodeURIComponent(search)}`);
-    onClose();
-    
-  };
-
-  if (isLoading) return null;
+  if (isLoading) return <Spinner loading={isLoading}/>;
 
   return (
     <div

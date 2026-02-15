@@ -1,40 +1,10 @@
-import CartProductRow from "../components/CartProductRow"
-import Spinner from "../components/Spinner"
-import { useCartStore } from "../store/cart.store"
-import { useQueries } from "@tanstack/react-query"
-import type { Product } from "../types/product.type"
-import { eachProduct } from "../services/products/product.service"
+import CartProductRow from "../feautures/cart/component/CartProductRow"
+import Spinner from "../shared/components/Spinner"
 import { Link } from "react-router-dom"
+import { useCartProducts } from "../feautures/cart/useCartProducts"
 
 const CartPage = () => {
-
-    const {cart} = useCartStore()
-    const cart_Products = cart.map(items=> items.id);
-    
-    const cartProduct = useQueries({
-            queries: cart_Products.map((id:number)=>({
-                queryKey:['cartProduct' , id],
-                queryFn:()=>eachProduct(id),
-                enabled: !!id,
-            }))
-        });
-        
-        const cartProducts = cartProduct
-        .map((q) => q.data)
-        .filter(Boolean) as Product[];
-        const isLoading = cartProduct.some((q) => q.isLoading || q.isFetching); //loading state
-        const isError = cartProduct.some((q => q.isError )) // error state 
-
-
-        const subtotal = cart.reduce((acc, p) => {
-          const prod  = cartProducts.find(items => items.id === p.id)
-          if (!prod) return acc
-          const price =  Math.round(prod.price  - (prod.price * (prod.discountPercentage/100)));
-          return acc + price * p.quantity 
-        }, 0)
-
-        const shipping = 0;
-        const total = subtotal + shipping
+    const {cartProducts, isLoading, isError, subtotal, shipping, total} = useCartProducts(); 
     
         if (isLoading) {
           return (
@@ -129,7 +99,7 @@ const CartPage = () => {
     </div>
 
     <div className="flex justify-center">
-      <Link to={'*'} className="bg-red-500 hover:bg-red-600 text-white px-14 py-4 rounded-md text-lg font-medium transition active:scale-95">
+      <Link to={'/checkout'} className="bg-red-500 hover:bg-red-600 text-white px-14 py-4 rounded-md text-lg font-medium transition active:scale-95">
         Procees to checkout
       </Link>
     </div>

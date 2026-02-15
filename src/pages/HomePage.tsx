@@ -1,5 +1,5 @@
-import HomePageGrd from "../components/HomePageGrd";
-import SideBar from "../components/SideBar";
+import HomePageGrd from "../feautures/products/components/HomePageGrd";
+import SideBar from "../feautures/products/components/SideBar";
 
 
 const HomePage = () => {

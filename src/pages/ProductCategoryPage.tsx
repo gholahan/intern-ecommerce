@@ -1,26 +1,24 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { categorySearch } from '../services/products/product.service';
-import ProductGrid from '../components/ProductGrid';
-import Pagination from '../components/Pagination';
-import { useState } from 'react';
-import Spinner from '../components/Spinner';
+import { useParams, useSearchParams } from 'react-router-dom';
+import {useCategory} from '../feautures/products/hooks/useCategory'
+import ProductGrid from '../feautures/products/components/ProductGrid';
+import Pagination from '../shared/components/Pagination';
+import Spinner from '../shared/components/Spinner';
  
 
 const CategoryPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get('page') ?? '1', 10);
+  const {categoryName } = useParams()
+  if(!categoryName) return
+  const {data,isLoading} = useCategory(categoryName,page)
+   const totalPages = data ? Math.ceil(data.total / data.limit) : 1;
 
-     const limit = 24;
-    const [page, setPage] = useState(1)
-
-    const {categoryName} = useParams();
-
-     const{data, isLoading} = useQuery({
-     queryKey: ['category', categoryName],
-     queryFn: () => categorySearch(categoryName as string, (page - 1) * limit, limit),
-     enabled: !!categoryName,
-  });
-
-  const totalPages = data ? Math.ceil(data.total / data.limit) : 1;
+  const handlePageChange = (newPage: number) => {
+    setSearchParams((prev) => {
+      prev.set('page', String(newPage));
+      return prev;
+    });
+  };
 
   if(isLoading) return <Spinner loading={isLoading}/>
   return (
@@ -32,11 +30,11 @@ const CategoryPage = () => {
 
       <ProductGrid product={data?.products ?? []} explore={true} />
 
-      {data?.products && data.products.length > 0 && (
+      {data?.products && data.products.length > 0 && totalPages > 1 && (
         <Pagination
           page={page}
-          setPage={setPage}
-          hasNextPage={data.products.length === limit}
+          setPage={handlePageChange}
+          hasNextPage={page < totalPages}
           totalPages={totalPages}
         />
       )}

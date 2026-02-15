@@ -1,26 +1,9 @@
-import { useQueries } from "@tanstack/react-query"
-import { useFavoritesStore } from "../store/favourite.store"
-import type { Product } from "../types/product.type"
-import { eachProduct } from "../services/products/product.service"
-import ProductGrid from "../components/ProductGrid"
-import Spinner from "../components/Spinner"
+import { useFavoritesProducts } from "../feautures/favorites/useFavorites"
+import ProductGrid from "../feautures/products/components/ProductGrid"
+import Spinner from "../shared/components/Spinner"
 
 const Wishlist = () => {
-      const favorites: number[] = useFavoritesStore(s=>s.favorites);
-
-  const likedProduct = useQueries({
-        queries: favorites.map((id:number)=>({
-            queryKey:['likedProduct' , id],
-            queryFn:()=>eachProduct(id),
-            enabled: !!id,
-        }))
-    });
-    const likeProducts = likedProduct
-    .map((q) => q.data)
-    .filter(Boolean) as Product[];
-
-    const isLoading = likedProduct.some((q) => q.isLoading || q.isFetching); //loading state
-    const isError = likedProduct.some((q => q.isError )) // error state
+   const{ favorites, likedProducts, isLoading, isError } = useFavoritesProducts();
 
      if (isLoading) {
           return (
@@ -47,7 +30,7 @@ const Wishlist = () => {
            </button>
           </div>
         <div>
-          <ProductGrid product={likeProducts} explore={false}/>
+          <ProductGrid product={likedProducts} explore={false}/>
         </div>
       </div>
     </div>

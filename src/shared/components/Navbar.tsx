@@ -2,15 +2,15 @@ import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { UserPen } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import { useFavoritesStore } from "../store/favourite.store";
+import { useFavoritesStore } from "../../feautures/favorites/favourite.store";
 import SearchBar from "./SearchBar";
-import { useCartStore } from "../store/cart.store";
+import { useCartStore } from "../../feautures/cart/cart.store";
 
 
 const Navbar = () => {
 
-  const {favorites} = useFavoritesStore() //
-  const {cart} = useCartStore();
+  const favorites = useFavoritesStore(s=> s.favorites);
+  const cart = useCartStore(s=> s.cart);
 
   const navClass = ({ isActive}:any) =>
     `text-base transition ${

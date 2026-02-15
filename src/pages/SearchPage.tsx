@@ -1,25 +1,24 @@
-import ProductGrid from "../components/ProductGrid";
-import Pagination from '../components/Pagination';
+import ProductGrid from "../feautures/products/components/ProductGrid";
+import Pagination from '../shared/components/Pagination';
 import { useSearchParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchSearch } from '../services/products/product.service';
-import type { fetchAllProductRes } from '../types/product.type';
-import { useState } from 'react';
-import Spinner from "../components/Spinner";
+import Spinner from "../shared/components/Spinner";
+import { useSearchQuery } from "../feautures/products/hooks/useSearchQuery";
 
 const SearchPage = () => {
-  const limit = 24;
-  const [searchParams] = useSearchParams();
-  const [page, setPage] = useState(1);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q') ?? '';
+  const page = parseInt(searchParams.get('page') ?? '1', 10);
+  const {data, isLoading, isError} = useSearchQuery(page,query)
 
-  const { data, isLoading, isError } = useQuery<fetchAllProductRes>({
-    queryKey: ['search', query, page],
-    queryFn: () => fetchSearch(query, (page - 1) * limit, limit),
-    enabled: query.length > 0,
-  });
+  const handlePageChange = (newPage: number) => {
+    setSearchParams((prev) => {
+      prev.set('page', String(newPage));
+      return prev;
+    });
+  };
 
-  const totalPages = data?.products ? Math.ceil(data.products.length / limit) : 1;
+  const totalPages = data?.total ? Math.ceil(data.total / 24) : 1;
 
   if (!query) {
     return (
@@ -60,11 +59,11 @@ const SearchPage = () => {
           <>
             <ProductGrid product={data.products} explore={false} />
             
-            {data.products.length > 0 && (
+            {totalPages > 1 && (
               <Pagination
                 page={page}
-                setPage={setPage}
-                hasNextPage={data.products.length === 24}
+                setPage={handlePageChange}
+                hasNextPage={page < totalPages}
                 totalPages={totalPages}
               />
             )}

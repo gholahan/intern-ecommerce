@@ -1,14 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import {fetchCategoriesList} from '../services/products/product.service'
 import { Link } from 'react-router-dom';
+import { useCategories } from '../hooks/useCategories';
 
 const SideBar = () => {
-
-    const { data: categories = [], isLoading: catLoading } = useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategoriesList,
-  });
-
+   const {categories} = useCategories();
   return (  
       <div className="min-w-60 items-start gap-6">
         {/* Categories List */}

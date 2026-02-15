@@ -1,17 +1,17 @@
-import type { Product } from "../types/product.type";
+import type { Product } from "../types/product";
 import {Eye, ShoppingCart} from 'lucide-react'
-import { useFavoritesStore } from "../store/favourite.store";
+import { useFavoritesStore } from "../../favorites/favourite.store";
 import { CiHeart } from "react-icons/ci";      
 import { AiFillHeart } from "react-icons/ai";
 import { Star } from 'lucide-react';
-import { useCartStore } from "../store/cart.store";
+import { useCartStore } from "../../cart/cart.store";
 
 
 interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps>= ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
 
   const discountPrice = Math.round(product.price  - (product.price * (product.discountPercentage/100)));
 

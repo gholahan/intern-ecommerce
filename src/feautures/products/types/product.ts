@@ -38,11 +38,4 @@ export interface Product {
   images: string[];
   thumbnail: string;
   
-}
-
-export interface fetchAllProductRes{
-  products : Product[];
-  total: number;
-  skip:number;
-  limit :number
 } 
