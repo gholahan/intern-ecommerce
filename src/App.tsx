@@ -8,26 +8,27 @@ import Wishlist from './pages/WishListPage'
 import CategoryPage from './pages/ProductCategoryPage'
 import SearchPage from './pages/SearchPage'
 import CartPage from './pages/CartPage'
-
+import Checkout from './pages/Checkout'
 
 const App = () => {
 
   const routes = createBrowserRouter(createRoutesFromElements(
+    
     <Route element={<RootLayout/>}>
       <Route path='/' element={<HomePage/>}/>
       <Route path='wishlist' element={<Wishlist/>}/>
-      <Route path='' element={<SearchPage/>}/>
       <Route path='/search' element={<SearchPage/>}/>
       <Route path='/category/:categoryName' element ={<CategoryPage/>}/>
       <Route path ='/cart' element= {<CartPage/>}/>
+      <Route path='/cart/checkout' element={<Checkout/>}/>
     </Route>
-     
   ))
 
   return (
     <>
       <ToastContainer  position="top-center"/>
       <RouterProvider router={routes}/>
+      
     </>
   )
 }
