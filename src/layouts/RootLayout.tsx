@@ -10,9 +10,9 @@ const RootLayout = () => {
   const isHomePage = pathname === "/";
   return (
     <>
-    <ScrollToTop />
      <AnnouncementBar/>
      <Navbar/>
+     <ScrollToTop />
     <div className="flex flex-col">
      <main className='min-h-screen px-4 sm:px-[4vw] md:px-[7vw] lg:px-[9vw]'>
       {!isHomePage && <Breadcrumbs />}
