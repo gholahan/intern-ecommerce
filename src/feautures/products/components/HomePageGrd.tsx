@@ -1,4 +1,3 @@
-import topImage from "../../../assets/images/top-image.jpg";
 import ProductGrid from "./ProductGrid";
 import Spinner from "../../../shared/components/Spinner";
 import Pagination from "../../../shared/components/Pagination";
@@ -30,7 +29,7 @@ const HomePageGrid = () => {
     <div>
       <div className="mt-6 ml-6">
         <img
-          src={topImage}
+          src="/public/images/homePage.jpg"
           alt="Top showcase"
           className="w-full h-auto object-cover shadow-md"
         />

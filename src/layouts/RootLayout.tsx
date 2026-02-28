@@ -1,7 +1,7 @@
 import AnnouncementBar from "../shared/components/AnnouncmentBar"
 import { Outlet, useLocation } from "react-router-dom"
 import Footer from "../shared/components/Footer"
-import Navbar from "../shared/components/Navbar"
+import Navbar from "../shared/components/nav/Navbar"
 import Breadcrumbs from "../shared/components/BreadCrumbs"
 import ScrollToTop from "../shared/components/ScrollToTop"
 const RootLayout = () => {

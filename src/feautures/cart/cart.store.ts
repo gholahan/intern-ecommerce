@@ -14,6 +14,7 @@ interface CartStore {
   increaseCount : (id:number) => void;
   decreaseCount : (id:number) => void;
   setQuantity : (i:number, quantity:number) => void;
+  getQuantity: (id: number) => number;
   added: (id: number) => boolean;
 }
 
@@ -46,9 +47,22 @@ export const useCartStore = create<CartStore>()(
 
         decreaseCount: (id) => set((state)=>{
          return{
-            cart: state.cart.map(items => items.id === id ? {...items, quantity:items.quantity - 1} : items)
-          }
+            cart: state.cart.map(items =>
+              items.id === id
+                ? {
+                    ...items,
+                    quantity: items.quantity > 1 ? items.quantity - 1 : 1,
+                  }
+                : items
+            ),
+          };
         }),
+
+        // optional helper to fetch quantity of specific item
+        getQuantity: (id) => {
+          const item = get().cart.find((it) => it.id === id);
+          return item ? item.quantity : 0;
+        },
 
         setQuantity: (id , quantity) => set((state)=>{
          const cart = state.cart.map(items => items.id === id ? {...items, quantity} : items);

@@ -12,7 +12,7 @@ type spinnerType = {
 const Spinner = ({loading}: spinnerType) => {
   return (
     <ClipLoader
-      color='#4338ca'
+      color='#FF0000'
       loading = {loading}
       cssOverride = {override}
       size = {75}

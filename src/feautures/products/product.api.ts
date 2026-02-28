@@ -1,6 +1,6 @@
 import type { Product } from "./types/product";
 import type { ProductRes } from "./types/productRes";
-import { api } from "../app/axios";
+import api from "../app/axios";
 
 export const fetchAllProduct = async (skip:number, limit:number):Promise<ProductRes>=>{
   const {data} = await api.get<ProductRes>("/products",{

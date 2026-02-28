@@ -36,7 +36,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     
-    <div className="rounded-lg  group mt-6 hover:-translate-y-2 transition-transform duration-300 ease-out">
+    <div className="rounded-lg mt-6 hover:-translate-y-2 transition-transform duration-300 ease-out">
      <div className="relative bg-gray-100 mb-5 rounded-sm group">
       {/* Action Icons */}
        <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
@@ -62,12 +62,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       {/* add to cart button */}
       <button
-           onClick={()=> (addedToCart ? removeFromCart(product.id) : addToCart(product.id))}
-            className="cursor-pointer bg-black opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0: w-full text-center hover:bg- text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
-          >
-            <ShoppingCart size={18} />
-            <span className="text-sm font-medium"> {addedToCart ? 'Added' : 'Add To Cart'}</span>
-        </button>
+        onClick={()=> (addedToCart ? removeFromCart(product.id) : addToCart(product.id))}
+        className="cursor-pointer bg-black  translate-y-2 w-full text-center  text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
+      >
+        <ShoppingCart size={18} />
+        <span className="text-sm font-medium"> {addedToCart ? 'Added' : 'Add To Cart'}</span>
+      </button>
       {/* Product Name */}
      </div>
       <h3 className="font-medium text-base mb-2">{product.title}</h3>

@@ -1,23 +1,28 @@
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { UserPen } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
-import { useFavoritesStore } from "../../feautures/favorites/favourite.store";
-import SearchBar from "./SearchBar";
-import { useCartStore } from "../../feautures/cart/cart.store";
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useFavoritesStore } from "../../../feautures/favorites/favourite.store";
+import SearchBar from "../SearchBar";
+import { useCartStore } from "../../../feautures/cart/cart.store";
+import { useAuthStore } from "../../../feautures/auth/auth.store";
 
 const Navbar = () => {
 
+  const navigate = useNavigate()
   const favorites = useFavoritesStore(s=> s.favorites);
   const cart = useCartStore(s=> s.cart);
+  const logout = useAuthStore(s=>s.logout)
 
+  const handleLogout = () => {
+  logout();
+  navigate("/login");
+  };
+  
   const navClass = ({ isActive}:any) =>
     `text-base transition ${
       isActive ? "underline font-medium" : "hover:underline"
     }`;
-
-
 
   return (
     <header className="bg-white text-black border-b border-gray-200">
@@ -33,7 +38,7 @@ const Navbar = () => {
           <NavLink to="/" className={navClass}>Home</NavLink>
           <NavLink to="/contact" className={navClass}>Contact</NavLink>
           <NavLink to="/about" className={navClass}>About</NavLink>
-          <NavLink to="/signup" className={navClass}>Sign Up</NavLink>
+          <NavLink to="/signup " className={navClass}>Sign Up</NavLink>
         </ul>
 
         {/* Actions */}
@@ -65,7 +70,7 @@ const Navbar = () => {
 
           <div
             className="
-              absolute right-0 top-full mt-2
+              absolute right-0 top-full -mt-0.5
               opacity-0 scale-95 pointer-events-none
               group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
               transition duration-200 ease-out
@@ -84,12 +89,12 @@ const Navbar = () => {
               <Link to="/orders" className="hover:underline rounded px-2 py-1">
                 Orders
               </Link>
-              <Link
-                to="/logout"
+              <button
+                onClick={handleLogout}
                 className="hover:underline rounded px-2 py-1"
               >
                 Logout
-              </Link>
+              </button>
             </div>
           </div>
         </div>

@@ -1,4 +1,3 @@
-// features/cart/hooks/useCartProducts.ts
 import { useQueries } from "@tanstack/react-query";
 import { eachProduct } from "../products/product.api";
 import type { Product } from "../products/types/product";
@@ -6,7 +5,7 @@ import { calculateSubtotal, calculateTotal } from "./cart.utils";
 import { useCartStore } from "./cart.store";
 
 export const useCartProducts = () => {
-  const { cart } = useCartStore();
+  const cart = useCartStore(s=>s.cart);
   const cartIds = cart.map((item) => item.id);
 
   // Fetch products
