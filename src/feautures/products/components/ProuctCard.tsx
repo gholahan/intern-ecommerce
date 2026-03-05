@@ -1,90 +1,162 @@
 import type { Product } from "../types/product";
-import {Eye, ShoppingCart} from 'lucide-react'
+import { Eye, ShoppingCart, Star, Trash } from "lucide-react";
 import { useFavoritesStore } from "../../favorites/favourite.store";
-import { CiHeart } from "react-icons/ci";      
+import { CiHeart } from "react-icons/ci";
 import { AiFillHeart } from "react-icons/ai";
-import { Star } from 'lucide-react';
 import { useCartStore } from "../../cart/cart.store";
-
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const discountPrice = Math.round(
+    product.price - product.price * (product.discountPercentage / 100)
+  );
 
-  const discountPrice = Math.round(product.price  - (product.price * (product.discountPercentage/100)));
+  const {
+    addToCart,
+    added,
+    removeFromCart,
+    increaseCount,
+    decreaseCount,
+    // cart // not destructuring cart here as we use selector below
+  } = useCartStore();
 
-  const {addToCart, removeFromCart, added} = useCartStore();
+  // quantity of this product in cart (0 when not added)
+  const quantity = useCartStore((state) =>
+    state.cart.find((item) => item.id === product.id)?.quantity ?? 0
+  );
+
   const addedToCart = added(product.id);
 
-  const {addFavorite, removeFavorite, isFavorite} = useFavoritesStore();
+  const { addFavorite, removeFavorite, isFavorite } =
+    useFavoritesStore();
+
   const liked = isFavorite(product.id);
 
   const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <span
-        key={index}
-        className={`text-lg ${
-          index < Math.floor(rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
+    return Array.from({ length: 5 }).map((_, i) => (
+      <Star
+        key={i}
+        size={16}
+        className={`${
+          i < Math.floor(rating)
+            ? "text-yellow-400 fill-yellow-400"
+            : "text-gray-300"
         }`}
-      >
-        <Star/>
-      </span>
+      />
     ));
   };
 
   return (
-    
-    <div className="rounded-lg mt-6 hover:-translate-y-2 transition-transform duration-300 ease-out">
-     <div className="relative bg-gray-100 mb-5 rounded-sm group">
-      {/* Action Icons */}
-       <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
-        <button
-          onClick={() => (liked ? removeFavorite(product.id) : addFavorite(product.id))}
-          className="bg-white rounded-full p-2 hover:bg-gray-100 transition"
-        >
-          {liked ? <AiFillHeart size={28} className="text-red-500" /> : <CiHeart size={28} />}
-        </button>
-        <button  className="bg-white rounded-full p-2 hover:bg-gray-100 transition ">
-            <Eye size={25}/>
+    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+
+      {/* Image Section */}
+      <div className="relative aspect-square bg-gray-100 overflow-hidden">
+
+        {/* Discount Badge */}
+        <span className="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium">
+          -{product.discountPercentage}%
+        </span>
+
+        {/* Action Buttons */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
+          <button
+            onClick={() =>
+              liked
+                ? removeFavorite(product.id)
+                : addFavorite(product.id)
+            }
+            className="bg-white p-2 rounded-full shadow hover:scale-105 transition"
+          >
+            {liked ? (
+              <AiFillHeart size={20} className="text-red-500" />
+            ) : (
+              <CiHeart size={20} />
+            )}
           </button>
-      </div>
-      <div className="absolute top-3 left-3 z-10 bg-[#DB4444] text-white px-2 py-2 rounded-md text-xs">
-        -{product.discountPercentage}%
-      </div>
 
-      {/* Product Image Area */}
-      <div className="w-full h-full rounded-lg mb-4 flex items-center justify-center aspect-square overflow-hidden relative">
-        <div className="absolute inset-0  bg-gray-300">
-          <img src={product.thumbnail}/> 
+          <button className="bg-white p-2 rounded-full shadow hover:scale-105 transition">
+            <Eye size={18} />
+          </button>
         </div>
-      </div>
-      {/* add to cart button */}
-      <button
-        onClick={()=> (addedToCart ? removeFromCart(product.id) : addToCart(product.id))}
-        className="cursor-pointer bg-black  translate-y-2 w-full text-center  text-white px-4 py-2 rounded-lg flex justify-center items-center gap-2 transition-all duration-200"
-      >
-        <ShoppingCart size={18} />
-        <span className="text-sm font-medium"> {addedToCart ? 'Added' : 'Add To Cart'}</span>
-      </button>
-      {/* Product Name */}
-     </div>
-      <h3 className="font-medium text-base mb-2">{product.title}</h3>
 
-      {/* Price and Rating */}
-      {/* <div className="flex items-center gap-2 mb-2"> */}
-       <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg font-bold text-destructive text-[#DB4444]">${discountPrice}</span>
-          <span className="text-sm text-muted-foreground line-through">
-           ${product.price}
+        {/* Product Image */}
+        <img
+          src={product.thumbnail}
+          alt={product.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-4">
+
+        {/* Title */}
+        <h3 className="font-medium text-sm mb-2 line-clamp-2">
+          {product.title}
+        </h3>
+
+        {/* Price */}
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-base font-semibold text-red-500">
+            ${discountPrice}
+          </span>
+          <span className="text-xs text-gray-400 line-through">
+            ${product.price}
           </span>
         </div>
-        <div className="flex items-center">
+
+        {/* Rating */}
+        <div className="flex items-center gap-1 mb-4">
           {renderStars(product.rating)}
         </div>
-        {/* <span className="text-gray-500 text-sm">({product.reviews})</span> */}
-      {/* </div> */}
+
+        {/* Cart Section */}
+        {!addedToCart ? (
+          <button
+            onClick={() => addToCart(product.id)}
+            className="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition"
+          >
+            <ShoppingCart size={16} />
+            <span className="text-sm">Add to Cart</span>
+          </button>
+        ) : (
+          <div className="flex items-center justify-between bg-gray-100 rounded-lg p-1">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => decreaseCount(product.id)}
+                disabled={quantity <= 1}
+                className={`w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition ${
+                  quantity <= 1 ? "cursor-not-allowed opacity-50" : ""
+                }`}
+              >
+                -
+              </button>
+
+              <span className="text-sm font-medium">{quantity} In Cart</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => increaseCount(product.id)}
+                className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition"
+              >
+                +
+              </button>
+
+              <button
+                onClick={() => removeFromCart(product.id)}
+                className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition text-red-500"
+                title="Remove from cart"
+              >
+                <Trash size={16} />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
-import FormInput from "../../shared/components/FormInput";
+import { useEffect, useRef } from "react";
+import FormInput from "../../../shared/components/FormInput";
 import type { FormikProps } from "formik";
-import type { CheckoutFormValues } from "./types";
+import type { CheckoutFormValues } from "../types";
 
 interface CheckoutFormFieldsProps {
   formik: FormikProps<CheckoutFormValues>;
@@ -9,9 +10,15 @@ interface CheckoutFormFieldsProps {
 const CheckoutFormFields = ({
   formik,
 }: CheckoutFormFieldsProps) => {
+  const firstInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    firstInputRef.current?.focus();
+  }, []);
   return (
     <div className="flex-1 flex flex-col gap-5 mr-22">
       <FormInput
+        ref={firstInputRef}
         name="fullName"
         label="Full Name"
         required

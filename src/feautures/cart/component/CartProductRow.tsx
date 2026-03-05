@@ -29,8 +29,9 @@ function CartProductRowItem({ item }: { item: Product }) {
   const cartItem = cart.find((c) => c.id === item.id)
   if (!cartItem) return null
 
-  const quantity = cartItem.quantity
-  const subtotal = item.price * quantity
+  const quantity = cartItem.quantity;
+  const discountPrice = Math.round(item.price - item.price * (item.discountPercentage / 100));
+  const subtotal = discountPrice * quantity
 
   const [inputValue, setInputValue] = useState(String(quantity))
 
@@ -74,7 +75,7 @@ function CartProductRowItem({ item }: { item: Product }) {
       </div>
 
       {/* Price */}
-      <div className="text-base font-semibold">${item.price.toFixed(2)}</div>
+      <div className="text-base font-semibold">${discountPrice}</div>
 
       {/* Quantity */}
       <div className="flex items-center border border-gray-300 rounded-sm overflow-hidden w-max">

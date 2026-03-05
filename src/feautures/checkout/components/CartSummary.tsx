@@ -1,4 +1,4 @@
-import type { CartSummaryProps } from "./types";
+import type { CartSummaryProps } from "../types";
 
 const CartSummary = ({
   cartProducts,
