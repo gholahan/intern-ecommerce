@@ -14,7 +14,7 @@ const RootLayout = () => {
      <Navbar/>
      <ScrollToTop />
     <div className="flex flex-col">
-     <main className='min-h-screen px-4 sm:px-[4vw] md:px-[7vw] lg:px-[9vw]'>
+     <main className='min-h-screen px-4 sm:px-[3vw] md:px-[5vw] lg:px-[7vw]'>
       {!isHomePage && <Breadcrumbs />}
       <Outlet/>
      </main>
