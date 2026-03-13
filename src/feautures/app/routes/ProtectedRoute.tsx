@@ -1,22 +1,20 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUser } from "../../auth/useUser";
-import Authloader from "../../../shared/components/loaders/Authloader";
-import type { User } from "../../auth/type";
+import Authloader from "../../auth/component/Authloader";
+// import type { User } from "../../auth/type";
+import { useAuthStore } from "../../auth/auth.store";
 
-const ProtectedRoute = ({accessRole} : {accessRole ?:User["role"]}) => {
-  const { data: user, isLoading, isError } = useUser();
-
-  if (isLoading) return <Authloader/>;
-
-  if (isError || !user) {
+const ProtectedRoute = () => {
+  const accessToken = useAuthStore((state) => state.accessToken)
+  const { data: user, isLoading,} = useUser();
+  console.log(user)
+   if (!accessToken) {
     return <Navigate to="/login" replace />;
   }
 
-  if(accessRole && user.role !== accessRole){
-    return <Navigate to="/" replace/>
-  }
+  if (isLoading) return <Authloader/>;
 
-  return <Outlet />;
+  return <Outlet /> ;
 };
 
 export default ProtectedRoute;

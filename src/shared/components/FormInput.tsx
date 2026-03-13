@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 type FormInputProps = {
   label: string;
   name: string;
@@ -7,14 +9,15 @@ type FormInputProps = {
   formik: any;
 };
 
-const FormInput = ({
+const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+({
   label,
   name,
   type = "text",
   required = false,
   placeholder,
   formik,
-}: FormInputProps) => {
+}: FormInputProps, ref) => {
   const { values, errors, touched, handleChange, handleBlur } = formik;
   const error = errors[name];
   const isTouched = touched[name];
@@ -27,6 +30,7 @@ const FormInput = ({
       </label>
 
       <input
+        ref={ref}
         name={name}
         type={type}
         placeholder={placeholder}
@@ -42,6 +46,9 @@ const FormInput = ({
       )}
     </div>
   );
-};
+}
+);
+
+FormInput.displayName = "FormInput";
 
 export default FormInput;

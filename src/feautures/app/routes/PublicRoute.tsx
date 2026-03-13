@@ -1,13 +1,13 @@
 import { Navigate, Outlet} from "react-router-dom"
-import { useUser } from "../../auth/useUser";
+import { useAuthStore } from "../../auth/auth.store";
 
-const ProtectedRoute = () => {
-  const{data:user} = useUser();
-    if(user){
+const PublicRoute = () => {
+  const accessToken = useAuthStore((state) => state.accessToken)
+    if(accessToken){
         return <Navigate to= "/" replace/> 
     }
 
   return <Outlet/>
 }
 
-export default ProtectedRoute
+export default PublicRoute
