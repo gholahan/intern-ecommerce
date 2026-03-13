@@ -1,6 +1,5 @@
 import { X } from "lucide-react";
 import ProductGrid from '../../feautures/products/components/ProductGrid';
-import Spinner from './Spinner';
 import { useSearchPreview } from "../../feautures/products/hooks/useSearchPreview";
 
 interface SearchModalProps {
@@ -11,7 +10,6 @@ interface SearchModalProps {
 const SearchModal = ({ search, onClose }: SearchModalProps) => {
   const {isLoading, data, handleViewAll} = useSearchPreview(search, onClose)
 
-  if (isLoading) return <Spinner loading={isLoading}/>;
 
   return (
     <div
@@ -38,7 +36,7 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
 
         {/* Content */}
         {data?.products && data.products.length > 0 ? (
-          <ProductGrid product={data.products.slice(0, 4)} explore={false} />
+          <ProductGrid product={data.products.slice(0, 4)} explore={false} loading={isLoading}/>
         ) : (
           <div className="text-center py-12 text-gray-500">
             <p className="text-lg">No products found for "{search}"</p>

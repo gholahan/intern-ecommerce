@@ -1,18 +1,24 @@
 import type { Product } from "../types/product";
 import ProductCard from "./ProuctCard";
+import ProductCardSkeleton from "../skeleton/productCardskelton";
 
 interface ProductGridProp{
     product: Product[],
-    explore:boolean
+    explore:boolean,
+    loading:boolean
 }
 
-const ProductGrid = ({product,explore}:ProductGridProp) => {
+const ProductGrid = ({product,explore,loading}:ProductGridProp) => {
   return (
     <div className="min-h-screen bg-white p-8 mt-13">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
-        {product?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+        {loading
+          ? Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+          : product?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
       </div>
 
       {/* View All Button */}

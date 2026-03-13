@@ -1,17 +1,9 @@
 import CartProductRow from "../feautures/cart/component/CartProductRow"
-import Spinner from "../shared/components/Spinner"
 import { Link } from "react-router-dom"
 import { useCartProducts } from "../feautures/cart/useCartProducts"
 
 const CartPage = () => {
-    const {cartProducts, isLoading, isError, subtotal, shipping, total} = useCartProducts(); 
-    
-        if (isLoading)
-          return (
-              <div className="flex justify-center items-center h-64">
-                <Spinner loading={isLoading} />
-              </div>
-          )
+    const {cartProducts,isLoading, isError, subtotal, shipping, total} = useCartProducts(); 
   
          if (isError)
           return (
@@ -30,7 +22,7 @@ const CartPage = () => {
      </header>
     {
         cartProducts.length > 0 ? (
-          <CartProductRow products={ cartProducts} />
+          <CartProductRow products={ cartProducts} loading={isLoading}/>
         ) : (
           <p  className="text-center">You have no products. <Link to='/' className="underline text-red-400 hover:text-red-700 cursor-pointer">Move to home</Link></p>
         )

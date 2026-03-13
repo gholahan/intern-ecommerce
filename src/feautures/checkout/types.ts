@@ -38,6 +38,7 @@ export interface CartItem {
 }
 
 export interface CartSummaryProps {
+  loading: boolean;
   cartProducts: Product[];
   cart: CartItem[];
   subtotal: number;

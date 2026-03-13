@@ -1,7 +1,6 @@
 import ProductGrid from "../feautures/products/components/ProductGrid";
 import Pagination from '../shared/components/Pagination';
 import { useSearchParams } from 'react-router-dom';
-import Spinner from "../shared/components/Spinner";
 import { useSearchQuery } from "../feautures/products/hooks/useSearchQuery";
 
 const SearchPage = () => {
@@ -28,14 +27,6 @@ const SearchPage = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="text-center py-12">
-        <Spinner loading={isLoading}/>
-      </div>
-    );
-  }
-
   if (isError || !data?.products) {
     return (
       <div className="text-center py-12">
@@ -57,7 +48,7 @@ const SearchPage = () => {
           </div>
         ) : (
           <>
-            <ProductGrid product={data.products} explore={false} />
+            <ProductGrid product={data.products} explore={false} loading={isLoading}/>
             
             {totalPages > 1 && (
               <Pagination

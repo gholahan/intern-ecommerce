@@ -1,4 +1,5 @@
 import type { CartSummaryProps } from "../types";
+import CartSummarySkeleton from "../CartSummarySkeleton";
 
 const CartSummary = ({
   cartProducts,
@@ -8,7 +9,12 @@ const CartSummary = ({
   total,
   formik,
   isProcessing = false,
+  loading
 }: CartSummaryProps) => {
+   if (loading) {
+    return <CartSummarySkeleton />;
+  }
+
   return (
     <div className="w-120 text-sm font-medium">
       {cartProducts?.map((prod) => {

@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { useCategories } from "../hooks/useCategories";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import CategoryListSkeleton from "../skeleton/categoryListSkeleton";
 
 const SideBar = () => {
-  const { categories } = useCategories();
+  const { categories,isLoading } = useCategories();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,18 +43,23 @@ const SideBar = () => {
           <h2 className="text-lg font-extrabold mb-4">Categories</h2>
 
           <ul className="flex flex-col gap-2 overflow-y-auto">
-            {categories.map((cat) => (
-              <li key={cat}>
-                <Link
-                  to={`/category/${cat}`}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-3 py-2 rounded-md hover:bg-gray-100 transition"
-                >
-                  {cat}
-                </Link>
-              </li>
-            ))}
+            {isLoading ? (
+              <CategoryListSkeleton catLength={categories.length} />
+            ) : (
+              categories.map((cat) => (
+                <li key={cat}>
+                  <Link
+                    to={`/category/${cat}`}
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 rounded-md hover:bg-gray-100 transition"
+                  >
+                    {cat}
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
+
         </nav>
       </aside>
     </>

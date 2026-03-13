@@ -2,19 +2,30 @@ import type { Product } from "../../products/types/product"
 import { useCartStore } from "../cart.store"
 import { Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
+import CartProductRowSkeleton from "../skeleton/cartProductRowSkeleton"
 
 interface CartProductRowProps {
   products: Product[]
+  loading:boolean
 }
 
-const CartProductRow = ({ products }: CartProductRowProps) => {
-  return (
+const CartProductRow = ({ products, loading }: CartProductRowProps) => {
+  if (loading){
+     return (
+     <>
+        {Array.from({ length: 4 }).map((_, i) => (
+          <CartProductRowSkeleton key={i} />
+        ))}
+      </>
+    )
+  }
+   return (
     <>
       {products.map((item) => (
         <CartProductRowItem key={item.id} item={item} />
       ))}
     </>
-  )
+   )
 }
 
 function CartProductRowItem({ item }: { item: Product }) {

@@ -2,7 +2,6 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import {useCategory} from '../feautures/products/hooks/useCategory'
 import ProductGrid from '../feautures/products/components/ProductGrid';
 import Pagination from '../shared/components/Pagination';
-import Spinner from '../shared/components/Spinner';
  
 
 const CategoryPage = () => {
@@ -19,8 +18,6 @@ const CategoryPage = () => {
       return prev;
     });
   };
-
-  if(isLoading) return <Spinner loading={isLoading}/>
   return (
     <>
       <div className="text-center pt-6">
@@ -28,7 +25,7 @@ const CategoryPage = () => {
         <p className="text-gray-600 mt-2">Explore products in this category</p>
       </div>
 
-      <ProductGrid product={data?.products ?? []} explore={true} />
+      <ProductGrid product={data?.products ?? []} explore={true}  loading={isLoading}/>
 
       {data?.products && data.products.length > 0 && totalPages > 1 && (
         <Pagination
