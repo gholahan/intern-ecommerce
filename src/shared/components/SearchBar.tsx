@@ -20,7 +20,7 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={(e)=> e.preventDefault()} className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-neutral-100 rounded-full shadow-sm">
+      <div className="relative bg-neutral-100 rounded-md shadow-sm">
         <input
           type="text"
           value={searchInput}
@@ -31,15 +31,15 @@ const SearchBar = () => {
               handleModalClose();
             }
           }}
-          placeholder="What are you looking for?"
-          className="w-full py-3 pl-5 pr-12 text-sm text-gray-700 outline-none rounded-full"
+          placeholder="search a product?"
+          className="w-full py-2 pl-2 text-sm font-normal outline-none"
         />
         <button 
           type="submit"
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-700"
+          className="absolute right-4 top-1/2 -translate-y-1/2  cursor-pointer hover:text-gray-500"
           aria-label="Search"
         >
-          <FaSearch size={18} />
+          <FaSearch size={14} />
         </button>
       </div>
 

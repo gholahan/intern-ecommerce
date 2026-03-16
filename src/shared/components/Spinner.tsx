@@ -14,7 +14,7 @@ const Spinner = ({loading}: spinnerType) => {
       color='#FF0000'
       loading = {loading}
       cssOverride = {override}
-      size = {75}
+      size = {45}
     />
   )
 }

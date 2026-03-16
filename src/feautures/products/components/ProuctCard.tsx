@@ -42,7 +42,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         size={16}
         className={`${
           i < Math.floor(rating)
-            ? "text-yellow-400 fill-yellow-400"
+            ? "text-yellow-500 fill-yellow-500"
             : "text-gray-300"
         }`}
       />
@@ -50,13 +50,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+    <div className=" text-sx group bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
 
       {/* Image Section */}
       <div className="relative aspect-square bg-gray-100 overflow-hidden">
 
         {/* Discount Badge */}
-        <span className="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium">
+        <span className="absolute top-3 left-3 z-10 bg-red-500 text-white text-xs px-1 py-0.5 rounded-full ">
           -{product.discountPercentage}%
         </span>
 
@@ -71,9 +71,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="bg-white p-2 rounded-full shadow hover:scale-105 transition"
           >
             {liked ? (
-              <AiFillHeart size={20} className="text-red-500" />
+              <AiFillHeart size={17} className="text-red-500" />
             ) : (
-              <CiHeart size={20} />
+              <CiHeart size={17} />
             )}
           </button>
 
@@ -91,16 +91,16 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-3">
 
         {/* Title */}
-        <h3 className="font-medium text-sm mb-2 line-clamp-2">
+        <h3 className="font-medium text-xs mb-1 line-clamp-2">
           {product.title}
         </h3>
 
         {/* Price */}
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-base font-semibold text-red-500">
+          <span className="text-sm font-medium text-red-500">
             ${discountPrice}
           </span>
           <span className="text-xs text-gray-400 line-through">
@@ -109,8 +109,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         {/* Rating */}
-        <div className="flex items-center gap-1 mb-4">
+        <div className="flex items-center gap-0.5 mb-1">
           {renderStars(product.rating)}
+          {product.rating}
         </div>
 
         {/* Cart Section */}
@@ -120,40 +121,37 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition"
           >
             <ShoppingCart size={16} />
-            <span className="text-sm">Add to Cart</span>
+            <span className="text-xs">Add to Cart</span>
           </button>
         ) : (
-          <div className="flex items-center justify-between bg-gray-100 rounded-lg p-1">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between ">
+            <div className="flex items-center gap-">
               <button
                 onClick={() => decreaseCount(product.id)}
                 disabled={quantity <= 1}
-                className={`w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition ${
+                className={`w-6 h-6 flex items-center justify-center rounded-full p-2 hover:bg-gray-500 bg-gray-300 transition ${
                   quantity <= 1 ? "cursor-not-allowed opacity-50" : ""
                 }`}
               >
                 -
               </button>
-
-              <span className="text-sm font-medium">{quantity} In Cart</span>
             </div>
-
+                 <span className="text-xs font-medium">{quantity}</span>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => increaseCount(product.id)}
-                className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition"
+                className="w-6 h-6 flex items-center justify-center  hover:bg-gray-400 bg-gray-300 rounded-full transition"
               >
                 +
               </button>
-
-              <button
+            </div>
+            <button
                 onClick={() => removeFromCart(product.id)}
                 className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200 transition text-red-500"
                 title="Remove from cart"
               >
                 <Trash size={16} />
               </button>
-            </div>
           </div>
         )}
       </div>

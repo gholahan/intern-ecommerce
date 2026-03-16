@@ -13,9 +13,9 @@ const SideBar = () => {
       {/* Toggle Button (mobile only) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-20 left-4 z-50 p-2 bg-white border rounded-lg shadow hover:bg-gray-50"
+        className="md:hidden fixed top-29 left-4 z-50 p-2 bg-white border rounded-md shadow hover:bg-gray-50"
       >
-        {isOpen ? <X size={20} /> : <Menu size={20} />}
+        {isOpen ? <X size={16} /> : <Menu size={16} />}
       </button>
 
       {/* Overlay */}
@@ -30,17 +30,17 @@ const SideBar = () => {
       <aside
         className={`
         fixed md:sticky top-0 left-0
-        h-screen w-60
+        h-screen w-50
         bg-white border-r border-gray-200
         transition-transform duration-300 ease-in-out
-        z-40
+        z-30
 
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         md:translate-x-0
         `}
       >
-        <nav className="p-5 flex flex-col h-full">
-          <h2 className="text-lg font-extrabold mb-4">Categories</h2>
+        <nav className="p-8 flex flex-col h-full ">
+          <h2 className="text-lg font-extrabold mb-3">Categories</h2>
 
           <ul className="flex flex-col gap-2 overflow-y-auto">
             {isLoading ? (
@@ -51,7 +51,7 @@ const SideBar = () => {
                   <Link
                     to={`/category/${cat}`}
                     onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 rounded-md hover:bg-gray-100 transition"
+                    className="block text-sm px-2 py-1 rounded-md hover:bg-gray-100 transition"
                   >
                     {cat}
                   </Link>

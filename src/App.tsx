@@ -19,6 +19,10 @@ import { refresh } from "./feautures/auth/auth.api";
 import { useAuthStore } from "./feautures/auth/auth.store";
 import Authloader from "./feautures/auth/component/Authloader";
 import ProfilePage from './pages/ProfilePage'
+import ProfileForm from "./pages/ProfileForm";
+import AddressBook from "./pages/AddressBook";
+import PaymentOptions from "./pages/PaymentOptions";
+import NotFound from "./pages/NotFound";
 const Checkout = lazy(() => import("./pages/Checkout"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 
@@ -30,17 +34,22 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
       </Route>
     </Route>
     <Route element={<ProtectedRoute/>}>
-    <Route element={<RootLayout/>}>
-      <Route path='/' element={<HomePage/>}/>
-      <Route path='wishlist' element={<Wishlist/>}/>
-      <Route path='/search' element={<SearchPage/>}/>
-      <Route path='/category/:categoryName' element ={<CategoryPage/>}/>
-      <Route path ='/cart' element= {<CartPage/>}/>
-      <Route path='/cart/checkout' element={<Suspense fallback={<Spinner/>}><Checkout/></Suspense>}/>
-      <Route path='/profile' element={<ProfilePage/>}/>
+      <Route element={<RootLayout/>}>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='wishlist' element={<Wishlist/>}/>
+        <Route path='/search' element={<SearchPage/>}/>
+        <Route path='/category/:categoryName' element ={<CategoryPage/>}/>
+        <Route path ='/cart' element= {<CartPage/>}/>
+        <Route path='/cart/checkout' element={<Suspense fallback={<Spinner/>}><Checkout/></Suspense>}/>
+          <Route path="/profile" element={<ProfilePage />}>
+            <Route index element={<ProfileForm />} />
+            <Route path="address" element={<AddressBook />} />
+            <Route path="payment" element={<PaymentOptions />} />
+        </Route>
+        <Route path='*' element={<NotFound/>}/>
+        </Route>
+      </Route>
     </Route>
-    </Route>
-    // </Route>
   ))
 
 const App = () => {

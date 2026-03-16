@@ -23,8 +23,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   const isTouched = touched[name];
 
   return (
-    <div className="flex flex-col gap-2">
-      <label className="text-sm text-gray-700">
+    <div className="flex flex-col gap-1">
+      <label className="text-sm font-medium text-gray-800">
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>
@@ -37,8 +37,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         value={values[name] || ""}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={`w-full bg-gray-100 px-4 py-2.5 rounded border outline-none transition
-          ${isTouched && error ? "border-red-500 ring-2 ring-red-200" : "border-gray-300 focus:ring-2 focus:ring-blue-500"}`}
+        className={`w-full bg-gray-100 text-xs px-3 py-2 rounded border outline-none transition
+          ${isTouched && error ? "border-red-500 ring-2 ring-red-200" : "border-gray-300 focus:ring-1 focus:ring-slate-500"}`}
       />
 
       {isTouched && error && (

@@ -5,8 +5,8 @@ import Footer from "../shared/components/Footer";
 const AuthLayout = () => {
   return (
     <div>
+      <AuthNavbar />
       <main className="min-h-screen md:pr-[1vw] lg:pr-[9vw]">
-        <AuthNavbar />
         <Outlet />
       </main>
     <Footer/>

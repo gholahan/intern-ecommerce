@@ -14,7 +14,7 @@ const Breadcrumbs: React.FC = () => {
     .filter((segment): segment is string => Boolean(segment));
 
   return (
-    <div className="flex items-center gap-2 text-sm my-11">
+    <div className=" text-xs flex items-center gap-1 my-8">
       <Link to="/" className="hover:underline">
         Home
       </Link>
@@ -24,7 +24,7 @@ const Breadcrumbs: React.FC = () => {
         const label = breadcrumbMap[segment] ?? segment;
 
         return (
-          <span key={to} className="flex items-center gap-2 text-gray-500">
+          <span key={to} className="flex items-center gap-1 text-gray-600">
             <span>/</span>
             <Link to={to} className="hover:underline capitalize ">
               {label}

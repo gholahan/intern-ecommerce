@@ -13,16 +13,16 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
 
   return (
     <div
-    className="mt-30 fixed inset-0 z-30 flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
+    className="mt-24 fixed inset-0 z-[9999] flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
     onClick={onClose}
     >
       <div
-        className="relative w-[90vw] max-w-8xl max-h-[55vh] overflow-y-auto bg-white rounded-lg shadow-2xl p-6 border border-gray-200 "
+        className="relative w-[80vw] max-w-6xl max-h-[55vh] overflow-y-auto bg-white rounded shadow-xl p-6 border border-gray-200 "
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-800">
+          <h3 className="text-base font-semibold text-gray-800">
             Search results for "<span className="text-blue-600">{search}</span>"
           </h3>
           <button
@@ -45,17 +45,16 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
         )}
 
         {data?.products && data.products.length > 0 && (
-          <div className="sticky bottom-0 flex justify-center ">
+        <div className="sticky bottom-0 flex justify-center mt-3 pt-2">
           <button
             type="button"
             onClick={handleViewAll}
-            className="text-blue-600 hover:text-white px-4 py-5 font-semibold bg-gray-800"
+            className="px-5 py-2 text-white bg-red-600 font-semibold rounded hover:bg-red-700 hover:text-white transition-colors duration-200"
           >
             See All →
           </button>
         </div>
-
-        )}
+      )}
       </div>
     </div>
   );

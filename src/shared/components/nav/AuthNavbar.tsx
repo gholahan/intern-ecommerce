@@ -12,7 +12,7 @@ const AuthNavbar = () => {
         </Link>
 
         {/* Right → Search only */}
-        <div className="w-full max-w-md flex justify-end">
+        <div className="w-1/2 text-end">
           <SearchBar />
         </div>
 

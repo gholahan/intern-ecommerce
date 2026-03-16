@@ -30,6 +30,7 @@ export const useCartProducts = () => {
   const total = calculateTotal(subtotal, shipping);
 
   return {
+    cart,
     cartProducts,
     isLoading,
     isError,

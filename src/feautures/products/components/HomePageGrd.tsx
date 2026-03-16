@@ -17,7 +17,7 @@ const HomePageGrid = () => {
   const { products, isLoading, isError, totalPages } = useProducts(page);
 
   if (isError) {
-    return <div className="flex justify-center items-center h-screen">Something went wrong reload page </div>
+    return <div className="flex text-sm justify-center items-center h-screen">Something went wrong reload page </div>
   }
 
   return (

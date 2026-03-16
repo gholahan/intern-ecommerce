@@ -16,7 +16,7 @@ const CheckoutFormFields = ({
     firstInputRef.current?.focus();
   }, []);
   return (
-    <div className="flex-1 flex flex-col gap-5 mr-22">
+    <div className="flex-1 flex flex-col gap-3 mr-22">
       <FormInput
         ref={firstInputRef}
         name="fullName"
