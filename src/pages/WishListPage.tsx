@@ -38,7 +38,7 @@ const Wishlist = () => {
                 </button>
                 </div>
               <div>
-          <ProductGrid product={likedProducts} explore={false} loading={isLoading}/>
+          <ProductGrid product={likedProducts} loading={isLoading}/>
         </div>
                </>
             ) : (

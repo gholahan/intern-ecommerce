@@ -48,7 +48,7 @@ const SearchPage = () => {
           </div>
         ) : (
           <>
-            <ProductGrid product={data.products} explore={false} loading={isLoading}/>
+            <ProductGrid product={data.products} loading={isLoading}/>
             
             {totalPages > 1 && (
               <Pagination

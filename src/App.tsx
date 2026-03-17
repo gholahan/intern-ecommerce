@@ -1,12 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-
-import ProtectedRoute from "./feautures/app/routes/ProtectedRoute";
 import PublicRoute from "./feautures/app/routes/PublicRoute";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import HomePage from "./pages/HomePage";
 import RootLayout from "./layouts/RootLayout";
 import Wishlist from "./pages/WishListPage";

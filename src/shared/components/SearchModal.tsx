@@ -13,7 +13,7 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
 
   return (
     <div
-    className="mt-24 fixed inset-0 z-[9999] flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
+    className="mt-24 fixed inset-0 z-9999 flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
     onClick={onClose}
     >
       <div
@@ -36,7 +36,7 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
 
         {/* Content */}
         {data?.products && data.products.length > 0 ? (
-          <ProductGrid product={data.products.slice(0, 4)} explore={false} loading={isLoading}/>
+          <ProductGrid product={data.products.slice(0, 4)} loading={isLoading}/>
         ) : (
           <div className="text-center py-12 text-gray-500">
             <p className="text-lg">No products found for "{search}"</p>

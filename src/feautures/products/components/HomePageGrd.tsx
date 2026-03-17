@@ -30,7 +30,7 @@ const HomePageGrid = () => {
         />
       </div> */}
 
-      <ProductGrid product={products} explore={false} loading={isLoading} />
+      <ProductGrid product={products} loading={isLoading} />
 
       {products.length > 0 && totalPages > 1 && (
         <Pagination
