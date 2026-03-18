@@ -91,7 +91,7 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" limit={1}/>
       <RouterProvider router={routes} />
     </>
   );

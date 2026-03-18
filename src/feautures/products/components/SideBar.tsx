@@ -13,7 +13,7 @@ const SideBar = () => {
       {/* Toggle Button (mobile only) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-29 left-4 z-50 p-2 bg-white border rounded-md shadow hover:bg-gray-50"
+        className="md:hidden fixed top-27 left-4 z-50 p-2 bg-white border rounded-md shadow hover:bg-gray-50"
       >
         {isOpen ? <X size={16} /> : <Menu size={16} />}
       </button>

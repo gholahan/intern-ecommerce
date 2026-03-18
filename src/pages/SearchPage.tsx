@@ -27,7 +27,7 @@ const SearchPage = () => {
     );
   }
 
-  if (isError || !data?.products) {
+  if (isError) {
     return (
       <div className="text-center py-12">
         <p className="text-red-500">Error loading search results</p>
@@ -37,18 +37,17 @@ const SearchPage = () => {
 
   return (
     <div> 
-      <div className="px-6 py-4">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
           Search Results for "<span className="text-blue-600">{query}</span>"
         </h2>
-        {data.products.length === 0 ? (
+        {data?.products.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             <p className="text-lg">No products found</p>
             <p className="text-sm mt-2">Try searching with different keywords</p>
           </div>
         ) : (
           <>
-            <ProductGrid product={data.products} loading={isLoading}/>
+            <ProductGrid product={data?.products ?? []} loading={isLoading}/>
             
             {totalPages > 1 && (
               <Pagination
@@ -61,7 +60,6 @@ const SearchPage = () => {
           </>
         )}
       </div>
-    </div>
   );
 };
 

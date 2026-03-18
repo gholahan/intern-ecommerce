@@ -14,7 +14,7 @@ const Breadcrumbs: React.FC = () => {
     .filter((segment): segment is string => Boolean(segment));
 
   return (
-    <div className=" text-xs flex items-center gap-1 my-8">
+    <div className=" text-xs flex items-center gap-1 sm:my-8 my-10">
       <Link to="/" className="hover:underline">
         Home
       </Link>

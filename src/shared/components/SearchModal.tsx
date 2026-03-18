@@ -13,11 +13,11 @@ const SearchModal = ({ search, onClose }: SearchModalProps) => {
 
   return (
     <div
-    className="mt-24 fixed inset-0 z-9999 flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
+    className="mt-27 fixed inset-0 z-9999 flex items-start justify-center bg-black/30 backdrop-blur-[2px]"
     onClick={onClose}
     >
       <div
-        className="relative w-[80vw] max-w-6xl max-h-[55vh] overflow-y-auto bg-white rounded shadow-xl p-6 border border-gray-200 "
+        className="relative w-full sm:max-w-6xl max-h-[55vh] overflow-y-auto bg-white rounded shadow-xl p-3 border border-gray-200 "
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
