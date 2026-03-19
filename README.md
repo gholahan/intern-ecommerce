@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# Modern E-Commerce Web Application
+A modern, responsive e-commerce web application built with React, Vite, and TypeScript.
+Users can browse products, manage a cart and wishlist, and authenticate using demo accounts.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Preview Link
+https://e-commerce-webapp-riz3.vercel.app/
 
-Currently, two official plugins are available:
+## Demo Accounts
+Login using any DummyJSON user(https://dummyjson.com/users)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Example credentials:
 
-## React Compiler
+ Username | Password |
+|----------|----------|
+| emilys | emilyspass |
+| michaelw | michaelwpass |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- Browse the full product catalog  
+- Search products using the search bar, with modal preview results and a “See all” button to navigate to the full search page  
+- Sharable search URLs for easy linking and bookmarking  
+- Add products to the shopping cart and adjust quantities on any page  
+- Save products to a wishlist and browse wishlist page  
+- Automatically calculated total and subtotal for checkout  
+- JWT-based authentication with protected and public routes  
+- Responsive design for both mobile and desktop  
+- Skeleton loaders for a smooth loading experience  
+- Toast notifications for user feedback  
+- Pagination on all pages with ProductCard components (24 products per page)
 
-## Expanding the ESLint configuration
+## Tech Stack
+- **Frontend:** React, TypeScript, Vite  
+- **Styling:** Tailwind CSS  
+- **State Management:** TanStack Query (Server State), Zustand (Client State)  
+- **Routing:** React Router  
+- **Forms & Validation:** Formik, Yup  
+- **API & HTTP:** Axios, [DummyJSON](https://dummyjson.com)  
+- **UI & Feedback:** React Toastify, React Icons, Lucide React  
+- **Deployment:** Vercel
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
+git clone https://github.com/gholahan/e-commerce_webapp.git
+- cd e-commerce_webapp
+- npm install
+- npm run dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Architecture
+The project uses a feature-based folder structure — each feature contains its own components, skeletons, hooks, services, types, and store, keeping related code grouped together for scalability and maintainability.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+├─ app/
+│  ├─ routes/
+│  └─ axios.ts
+│
+├─ features/
+│  ├─ auth/
+│  ├─ products/
+│  ├─ cart/
+│  ├─ checkout/
+│  └─ wishlist/
+│
+├─ layouts/
+├─ pages/
+├─ shared/
+│
+├─ App.tsx
+├─ main.tsx
+└─ index.css
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## State Management
+- **TanStack Query:** Handles server state, caching, and background updates  
+- **Zustand:** Manages lightweight client-side global state
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Authentication
+- JWT-based authentication with protected and public route guards.
+- Axios request interceptors automatically attach access tokens.
+- Axios response interceptors handle token expiration and refresh.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## API Reference
+Powered by the [DummyJSON API](https://dummyjson.com/).
+
+- [Full API documentation](https://dummyjson.com/docs)
+- [List of demo users](https://dummyjson.com/users)
+
+## UI Inspo
+https://www.figma.com/design/PBL1XNC8OQgcQhElK6omzI/Full-E-Commerce-Website-UI-UX-Design
