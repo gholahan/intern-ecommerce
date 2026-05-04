@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from core.config import ORIGINS
 
 
-app = FastAPI()
+app = FastAPI(title="Exclusive e_commerce API")
 app.include_router(billing_router)
 app.include_router(webhook_router)
 app.include_router(verify_payment_router)
@@ -19,6 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+print("CORS ORIGINS:", ORIGINS)
 
 @app.get("/")
 async def health_check():
