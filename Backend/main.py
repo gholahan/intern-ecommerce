@@ -13,7 +13,9 @@ app.include_router(verify_payment_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ORIGINS,
+    allow_origins=["http://localhost:5173",
+    "https://e-commerce-webapp-riz3.vercel.app"
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
