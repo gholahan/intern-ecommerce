@@ -6,11 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 # from core.config import ORIGINS
 from core.config import PAYSTACK_SECRET
 
-if not PAYSTACK_SECRET:
-    raise ValueError("PAYSTACK_SECRET not available")
-
 
 app = FastAPI(title="Exclusive e_commerce API")
+if not PAYSTACK_SECRET:
+    raise ValueError("PAYSTACK_SECRET not available")
 app.include_router(billing_router)
 app.include_router(webhook_router)
 app.include_router(verify_payment_router)
